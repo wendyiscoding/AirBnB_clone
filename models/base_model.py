@@ -49,10 +49,9 @@ class BaseModel():
         """sets attributes from dictionary
         """
         for (k, v) in kwargs.items():
-            if "__" not in k:
-                if k in ('created_at', 'updated_at'):
-                    self.__dict__[k] = datetime.datetime\
-                                       .strptime(v,
-                                                 "%Y-%m-%dT%H:%M:%S.%f")
-                else:
-                    self.__dict__[k] = v
+            if k in ('created_at', 'updated_at'):
+                self.__dict__[k] = datetime.datetime\
+                                           .strptime(v,
+                                                     "%Y-%m-%dT%H:%M:%S.%f")
+            else:
+                self.__dict__[k] = v

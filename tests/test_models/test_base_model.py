@@ -53,4 +53,20 @@ class TestBaseModel(unittest.TestCase):
     def test_from_dict_basic(self):
         """tests the from_dict method
         """
-        my_dict = self.temp_b.to_dict()        
+        my_dict = self.temp_b.to_dict()
+        my_base = BaseModel(**my_dict)
+        self.assertEqual(my_base.id, self.temp_b.id)
+        self.assertEqual(my_base.updated_at, self.temp_b.updated_at)
+        self.assertEqual(my_base.created_at, self.temp_b.created_at)
+        self.assertEqual(my_base.__class__.__name__,
+                         self.temp_b.__class__.__name__)
+
+    def test_from_dict_hard(self):
+        self.temp_b.random = "hello!"
+        self.temp_b.z = 55
+        my_dict = self.temp_b.to_dict()
+        self.assertEqual(my_dict['z'], 55)
+        my_base = BaseModel(**my_dict)
+        self.assertEqual(my_base.z, self.temp_b.z)
+        self.assertEqual(my_base.random, self.temp_b.random)
+        self.assertEqual(my_base.created_at, self.temp_b.created_at)
