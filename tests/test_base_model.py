@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 
+import datetime
 import unittest
 from models.base_model import BaseModel
 
@@ -34,3 +35,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(True, boolean)
         boolean = "datetime.datetime" in my_str
         self.assertEqual(True, boolean)
+
+    def test_to_dict(self):
+        """tests the to_dict method to make sure properly working
+        """
+        my_dict = self.temp_b.to_dict()
+        self.assertEqual(str, type(my_dict['created_at']))
+        self.assertEqual(my_dict['created_at'],
+                         self.temp_b.created_at.isoformat())
+        self.assertEqual(datetime.datetime, type(self.temp_b.created_at))
+        self.assertEqual(my_dict['__class__'],
+                         self.temp_b.__class__.__name__)
+        self.assertEqual(my_dict['id'], self.temp_b.id)
+        
