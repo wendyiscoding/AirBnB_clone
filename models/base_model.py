@@ -12,7 +12,7 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
         """init method for base class used in instantiation
         """
-        if len(kwargs) > 1:
+        if len(kwargs) >= 1:
             self.set_from_dict(**kwargs)
         else:
             self.id = str(uuid.uuid4())
