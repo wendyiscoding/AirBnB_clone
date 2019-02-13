@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""This module is the base model for use in all other models
+"""
+
 
 import uuid
 import datetime

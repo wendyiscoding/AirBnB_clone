@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-
+"""
+test module for testing base models
+"""
 
 import datetime
 import unittest
@@ -47,4 +49,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_dict['__class__'],
                          self.temp_b.__class__.__name__)
         self.assertEqual(my_dict['id'], self.temp_b.id)
-        
+
+    def test_from_dict_basic(self):
+        """tests the from_dict method
+        """
+        my_dict = self.temp_b.to_dict()        
