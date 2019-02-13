@@ -32,7 +32,7 @@ class BaseModel():
         """
         returns the dictionary of our instance
         """
-        temp_d = self.__dict__
+        temp_d = self.__dict__.copy()
         temp_d['__class__'] = self.__class__.__name__
         temp_d['created_at'] = self.created_at.isoformat()
         temp_d['updated_at'] = self.updated_at.isoformat()
