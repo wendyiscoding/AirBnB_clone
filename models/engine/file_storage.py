@@ -4,7 +4,9 @@ module for serializing and deserializing object to file storage
 """
 
 
+import json
 import os
+from models.base_model import BaseModel
 
 
 class FileStorage():
@@ -20,25 +22,43 @@ class FileStorage():
         """
         self.engine_directory = os.path.dirname(os.path.abspath(__file__))
         self.parent_directory = os.getcwd()
-        self.__file_path = self.engine_directory + '/objects.json'
-        print(self.__file_path)
-        self.__objects = {}
+        self.__file_path = self.parent_directory + '/file.json'
+        self.__objects = dict()
 
     def all(self):
         """returns the dictionary __objects
         """
+        return self.__objects
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id
         """
+        # TODO not sure if this check is needed for holberton checker
+        try:
+            obj_d = obj.to_dict()
+        except:
+            raise TypeError('object passed to filestorage has no to_dict()')
+        key = obj_d['__class__'] + '.' + str(obj_d['id'])
+        self.__objects[key] = obj
 
     def save(self):
         """serializes the __objects to the JSON file
             -> path (__file_path)
         """
+        json_dump = str({k: v.to_dict() for (k, v) in self.__objects.items()})
+        with open(self.__file_path, 'w', encoding='utf-8') as myFile:
+            myFile.write(json_dump)
 
     def reload(self):
         """deserializes the JSON file to __objects
             -> path (__file_path)
            ONLY if it exists, no exceptions are raised
         """
+        try:
+            with open(self.__file_path, 'r', encoding='utf-8') as myFile:
+                my_obj_dump = myFile.read()
+        except:
+            return
+        self.__objects = eval(my_obj_dump)
+        for (k, v) in self.__objects.items():
+            self.__objects[k] = BaseModel(**v)
