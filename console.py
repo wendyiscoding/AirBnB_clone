@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def postloop(self):
-        print()
+        pass
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
