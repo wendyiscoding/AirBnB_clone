@@ -3,8 +3,9 @@
 """
 
 
-import uuid
 import datetime
+import models
+import uuid
 
 
 class BaseModel():
@@ -21,9 +22,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
-            from models.__init__ import storage
-            storage.new(self)
-            del storage
+        models.storage.new(self)
 
     def __str__(self):
         """custom str method for str and print
@@ -36,10 +35,8 @@ class BaseModel():
     def save(self):
         """save method used for updating class so updated_at changes
         """
-        from models.__init__ import storage
-        storage.save()
-        del storage
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
