@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """console module
 """
-from models.base_model import BaseModel
 import cmd
-from models.__init__ import storage
 import shlex
+import models
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
         if not self.verify_id(args):
             return
         string_key = str(args[0]) + '.' + str(args[1])
-        objects = storage.all()
+        objects = models.storage.all()
         print(objects[string_key])
 
     def do_destroy(self, line):
@@ -55,14 +55,14 @@ class HBNBCommand(cmd.Cmd):
         if not self.verify_id(args):
             return
         string_key = str(args[0]) + '.' + str(args[1])
-        objects = storage.all()
-        storage.delete(objects[string_key])
-        storage.save()
+        objects = models.storage.all()
+        models.storage.delete(objects[string_key])
+        models.storage.save()
 
     def do_all(self, line):
         """prints all string rep of all instances based or not on class name"""
         args = line.split()
-        objects = storage.all()
+        objects = models.storage.all()
         print_list = []
         if len(args) == 0:
             # print all classes
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         if not self.verify_attribute(args):
             return
         string_key = str(args[0]) + '.' + str(args[1])
-        objects = storage.all()
+        objects = models.storage.all()
         my_dict = objects[string_key].to_dict()
         attr_name = args[2]
         attr_value = args[3]
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
             if attr_name is key:
                 attr_value = eval('({}){}'.format(type(value), attr_value))
         setattr(objects[string_key], attr_name, attr_value)
-        storage.save()
+        models.storage.save()
 
     @classmethod
     def verify_class(cls, args):
@@ -118,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 2:
             print("** instance id missing **")
             return False
-        objects = storage.all()
+        objects = models.storage.all()
         string_key = str(args[0]) + '.' + str(args[1])
         if string_key not in objects.keys():
             print("** no instance found **")
