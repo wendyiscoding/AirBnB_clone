@@ -7,6 +7,7 @@ import shlex
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
+from models.place import Place
 from models.state import State
 from models.user import User
 
@@ -15,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel', 'User', 'State', 'City', 'Amenity']
+    class_list = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
 
     def do_EOF(self, args):
         """EOF command to exit the program
@@ -99,8 +100,14 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3]
         for (key, value) in my_dict.items():
-            if attr_name is key:
-                attr_value = eval('({}){}'.format(type(value), attr_value))
+            try:
+                if attr_name in key:
+                    if type(value) is list:
+                        attr_value = eval(attr_value, {'__builtins__': None}, {})
+                    else:
+                        attr_value = value.__class__(attr_value)
+            except:
+                return
         setattr(objects[string_key], attr_name, attr_value)
         objects[string_key].save()
 
