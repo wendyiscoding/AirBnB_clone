@@ -13,6 +13,6 @@ class City(BaseModel):
     """
 
     def __init__(self, *args, **kwargs):
-        """init method for user class used in instantiation
+        """init method for city class used in instantiation
         """
         super().__init__(*args, **kwargs)

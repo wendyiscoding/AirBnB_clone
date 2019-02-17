@@ -13,7 +13,7 @@ class Place(BaseModel):
     """
 
     def __init__(self, *args, **kwargs):
-        """init method for user class used in instantiation
+        """init method for place class used in instantiation
         """
         self.number_rooms = 0
         self.number_bathrooms = 0

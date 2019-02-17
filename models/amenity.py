@@ -13,6 +13,6 @@ class Amenity(BaseModel):
     """
 
     def __init__(self, *args, **kwargs):
-        """init method for user class used in instantiation
+        """init method for amenity class used in instantiation
         """
         super().__init__(*args, **kwargs)
