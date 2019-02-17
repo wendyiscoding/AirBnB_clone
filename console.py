@@ -5,13 +5,15 @@ import cmd
 import models
 import shlex
 from models.base_model import BaseModel
+from models.state import State
 from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel', 'User']
+    class_list = ['BaseModel', 'User', 'State']
 
     def do_EOF(self, args):
         """EOF command to exit the program
@@ -78,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
         print(print_list)
-        
+
     def do_update(self, line):
         """update instance based on cls name & id by adding or updating attr
         """
