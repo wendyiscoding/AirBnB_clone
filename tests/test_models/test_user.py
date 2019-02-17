@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
 """
-test module for testing base models
+test module for testing user models
 """
 
 import datetime
 import unittest
 from models.base_model import BaseModel
+from models.user import User
 
 
-class TestBaseModel(unittest.TestCase):
-    """test class for testing base models
+class TestUserModel(unittest.TestCase):
+    """test class for testing user models
     """
     def setUp(self):
-        self.temp_b = BaseModel()
+        self.temp_b = User()
 
     def tearDown(self):
         self.temp_b = None
 
     def test_type(self):
-        """test method for type testing of basemodel
+        """type checks for user model
         """
-        self.assertIsInstance(self.temp_b, BaseModel)
-        self.assertEqual(type(self.temp_b), BaseModel)
+        self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
+        self.assertIsInstance(self.temp_b, User)
+        self.assertEqual(type(self.temp_b), User)
 
     def test_basic_attribute_set(self):
-        """test method for basic attribute assignment
+        """basic attribute assignment tests for user model
         """
         self.temp_b.name = "bennett"
         self.temp_b.xyz = 400
@@ -36,7 +38,7 @@ class TestBaseModel(unittest.TestCase):
             the proper string
         """
         my_str = str(self.temp_b)
-        id_test = "[BaseModel] ({})".format(self.temp_b.id)
+        id_test = "[User] ({})".format(self.temp_b.id)
         boolean = id_test in my_str
         self.assertEqual(True, boolean)
         boolean = "updated_at" in my_str
@@ -62,7 +64,7 @@ class TestBaseModel(unittest.TestCase):
         """tests the from_dict method
         """
         my_dict = self.temp_b.to_dict()
-        my_base = BaseModel(**my_dict)
+        my_base = User(**my_dict)
         self.assertEqual(my_base.id, self.temp_b.id)
         self.assertEqual(my_base.updated_at, self.temp_b.updated_at)
         self.assertEqual(my_base.created_at, self.temp_b.created_at)
@@ -70,7 +72,7 @@ class TestBaseModel(unittest.TestCase):
                          self.temp_b.__class__.__name__)
 
     def test_from_dict_hard(self):
-        """test for the from_dict method for basemodel objects
+        """tests from dict method of user inherited from base_model
         """
         self.temp_b.random = "hello!"
         self.temp_b.z = 55

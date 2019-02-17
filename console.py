@@ -2,29 +2,34 @@
 """console module
 """
 import cmd
-import shlex
 import models
+import shlex
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel']
+    class_list = ['BaseModel', 'User', 'State',
+                  'City', 'Amenity', 'Place', 'Review']
 
     def do_EOF(self, args):
-        """EOF command to exit the program
-        """
+        """EOF command to exit the program"""
         return True
 
     def do_quit(self, args):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         return True
 
     def do_create(self, line):
-        """create command to create and store objects
-        """
+        """create command to create and store objects"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -35,8 +40,7 @@ class HBNBCommand(cmd.Cmd):
         print(inst.id)
 
     def do_show(self, line):
-        """show command to print string representation of an instance
-        """
+        """show command to print string representation of an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -47,8 +51,7 @@ class HBNBCommand(cmd.Cmd):
         print(objects[string_key])
 
     def do_destroy(self, line):
-        """destroy command to delete an instance
-        """
+        """destroy command to delete an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -77,10 +80,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
         print(print_list)
-        
+
     def do_update(self, line):
-        """update instance based on cls name & id by adding or updating attr
-        """
+        """update instance based on cls name & id by adding or updating attr"""
         args = shlex.split(line)
         if not self.verify_class(args):
             return
@@ -94,10 +96,18 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2]
         attr_value = args[3]
         for (key, value) in my_dict.items():
-            if attr_name is key:
-                attr_value = eval('({}){}'.format(type(value), attr_value))
+            try:
+                if attr_name in key:
+                    if type(value) is list:
+                        attr_value = eval(attr_value,
+                                          {'__builtins__': None},
+                                          {})
+                    else:
+                        attr_value = value.__class__(attr_value)
+            except:
+                return
         setattr(objects[string_key], attr_name, attr_value)
-        models.storage.save()
+        objects[string_key].save()
 
     @classmethod
     def verify_class(cls, args):

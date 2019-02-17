@@ -5,12 +5,18 @@ module for serializing and deserializing object to file storage
 
 
 import os
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage():
     """
-    FileStorage class for serialzing and deserializing objects
+    FileStorage class for serializing and deserializing objects
     into and from files respectively
     """
     engine_directory = ""
@@ -43,8 +49,8 @@ class FileStorage():
     def delete(self, obj):
         """deletes obj from __objects
         """
-        key = obj.__class__.__name__ + '.' + str(obj.id)
         try:
+            key = obj.__class__.__name__ + '.' + str(obj.id)
             del self.__objects[key]
             return True
         except:
@@ -68,6 +74,12 @@ class FileStorage():
                 my_obj_dump = myFile.read()
         except:
             return
-        self.__objects = eval(my_obj_dump)
-        for (k, v) in self.__objects.items():
-            self.__objects[k] = BaseModel(**v)
+        objects = eval(my_obj_dump)
+        for (k, v) in objects.items():
+            objects[k] = eval(k.split('.')[0] + '(**v)')
+        self.__objects = objects
+
+    def get_filepath(self):
+        """get filepath for JSON file
+        """
+        return self.__file_path

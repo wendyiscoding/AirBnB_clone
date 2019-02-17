@@ -29,6 +29,7 @@ Where X is the problem number for files that are relevant.
 
 ## :blue_book: Authors
 * **Bennett Dixon** - [@BennettDixon](https://github.com/BennettDixon)
+* **Wendy Leung** - [@wendyiscoding](https://github.com/wendyiscoding)
 
 ## :mag: License
 
