@@ -17,21 +17,19 @@ class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
+    class_list = ['BaseModel', 'User', 'State',
+                  'City', 'Amenity', 'Place', 'Review']
 
     def do_EOF(self, args):
-        """EOF command to exit the program
-        """
+        """EOF command to exit the program"""
         return True
 
     def do_quit(self, args):
-        """Quit command to exit the program
-        """
+        """Quit command to exit the program"""
         return True
 
     def do_create(self, line):
-        """create command to create and store objects
-        """
+        """create command to create and store objects"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -42,8 +40,7 @@ class HBNBCommand(cmd.Cmd):
         print(inst.id)
 
     def do_show(self, line):
-        """show command to print string representation of an instance
-        """
+        """show command to print string representation of an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -54,8 +51,7 @@ class HBNBCommand(cmd.Cmd):
         print(objects[string_key])
 
     def do_destroy(self, line):
-        """destroy command to delete an instance
-        """
+        """destroy command to delete an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -86,8 +82,7 @@ class HBNBCommand(cmd.Cmd):
         print(print_list)
 
     def do_update(self, line):
-        """update instance based on cls name & id by adding or updating attr
-        """
+        """update instance based on cls name & id by adding or updating attr"""
         args = shlex.split(line)
         if not self.verify_class(args):
             return
@@ -104,7 +99,9 @@ class HBNBCommand(cmd.Cmd):
             try:
                 if attr_name in key:
                     if type(value) is list:
-                        attr_value = eval(attr_value, {'__builtins__': None}, {})
+                        attr_value = eval(attr_value,
+                                          {'__builtins__': None},
+                                          {})
                     else:
                         attr_value = value.__class__(attr_value)
             except:
