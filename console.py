@@ -5,6 +5,7 @@ import cmd
 import models
 import shlex
 from models.base_model import BaseModel
+from models.city import City
 from models.state import State
 from models.user import User
 
@@ -13,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel', 'User', 'State']
+    class_list = ['BaseModel', 'User', 'State', 'City']
 
     def do_EOF(self, args):
         """EOF command to exit the program

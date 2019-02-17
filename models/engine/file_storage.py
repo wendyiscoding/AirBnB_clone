@@ -6,6 +6,7 @@ module for serializing and deserializing object to file storage
 
 import os
 from models.base_model import BaseModel
+from models.city import City
 from models.state import State
 from models.user import User
 

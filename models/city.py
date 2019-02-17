@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""state module
+"""city module
 """
 
 
@@ -8,8 +8,8 @@ import uuid
 from models.base_model import BaseModel
 
 
-class State(BaseModel):
-    """state model inherits from BaseModel
+class City(BaseModel):
+    """city model inherits from BaseModel
     """
 
     def __init__(self, *args, **kwargs):
