@@ -1,27 +1,29 @@
 #!/usr/bin/env python3
 """
-test module for testing base models
+test module for testing amenity models
 """
 
 import datetime
 import unittest
 from models.base_model import BaseModel
+from models.amenity import Amenity
 
 
-class TestBaseModel(unittest.TestCase):
-    """test class for testing base models
+class TestAmenityModel(unittest.TestCase):
+    """test class for testing amenity models
     """
     def setUp(self):
-        self.temp_b = BaseModel()
+        self.temp_b = Amenity()
 
     def tearDown(self):
         self.temp_b = None
 
     def test_type(self):
-        """test method for type testing of basemodel
+        """test method for type testing of amenity  model
         """
-        self.assertIsInstance(self.temp_b, BaseModel)
-        self.assertEqual(type(self.temp_b), BaseModel)
+        self.assertIsInstance(self.temp_b, Amenity)
+        self.assertEqual(type(self.temp_b), Amenity)
+        self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute assignment
@@ -36,7 +38,8 @@ class TestBaseModel(unittest.TestCase):
             the proper string
         """
         my_str = str(self.temp_b)
-        id_test = "[BaseModel] ({})".format(self.temp_b.id)
+        id_test = "[{}] ({})".format(self.temp_b.__class__.__name__,
+                                     self.temp_b.id)
         boolean = id_test in my_str
         self.assertEqual(True, boolean)
         boolean = "updated_at" in my_str
@@ -70,7 +73,7 @@ class TestBaseModel(unittest.TestCase):
         """tests the from_dict method
         """
         my_dict = self.temp_b.to_dict()
-        my_base = BaseModel(**my_dict)
+        my_base = self.temp_b.__class__(**my_dict)
         self.assertEqual(my_base.id, self.temp_b.id)
         self.assertEqual(my_base.updated_at, self.temp_b.updated_at)
         self.assertEqual(my_base.created_at, self.temp_b.created_at)
@@ -78,27 +81,27 @@ class TestBaseModel(unittest.TestCase):
                          self.temp_b.__class__.__name__)
 
     def test_from_dict_hard(self):
-        """test for the from_dict method for basemodel objects
+        """test for the from_dict method for class objects
         """
         self.temp_b.random = "hello!"
         self.temp_b.z = 55
         my_dict = self.temp_b.to_dict()
         self.assertEqual(my_dict['z'], 55)
-        my_base = BaseModel(**my_dict)
+        my_base = self.temp_b.__class__(**my_dict)
         self.assertEqual(my_base.z, self.temp_b.z)
         self.assertEqual(my_base.random, self.temp_b.random)
         self.assertEqual(my_base.created_at, self.temp_b.created_at)
 
     def test_unique_id(self):
-        """test for unique ids for basemodel objects
+        """test for unique ids for class objects
         """
-        another = BaseModel()
-        another2 = BaseModel()
+        another = self.temp_b.__class__()
+        another2 = self.temp_b.__class__()
         self.assertNotEqual(self.temp_b.id, another.id)
         self.assertNotEqual(self.temp_b.id, another2.id)
 
     def test_id_type_string(self):
-        """test id of the basemodel is a string
+        """test id of the class is a string
         """
         self.assertEqual(type(self.temp_b.id), str)
 
