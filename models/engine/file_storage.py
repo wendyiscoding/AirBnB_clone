@@ -5,15 +5,15 @@ module for serializing and deserializing object to file storage
 
 
 import os
+from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
 from models.state import State
 from models.user import User
 
-
 class FileStorage():
     """
-    FileStorage class for serialzing and deserializing objects
+    FileStorage class for serializing and deserializing objects
     into and from files respectively
     """
     engine_directory = ""
