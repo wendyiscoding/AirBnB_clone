@@ -58,6 +58,14 @@ class TestBaseModel(unittest.TestCase):
                          self.temp_b.__class__.__name__)
         self.assertEqual(my_dict['id'], self.temp_b.id)
 
+    def test_to_dict_more(self):
+        """tests more things with to_dict method
+        """
+        my_dict = self.temp_b.to_dict()
+        created_at = my_dict['created_at']
+        time = datetime.datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%f")
+        self.assertEqual(self.temp_b.created_at, time)
+
     def test_from_dict_basic(self):
         """tests the from_dict method
         """
@@ -80,3 +88,25 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_base.z, self.temp_b.z)
         self.assertEqual(my_base.random, self.temp_b.random)
         self.assertEqual(my_base.created_at, self.temp_b.created_at)
+
+    def test_unique_id(self):
+        """test for unique ids for basemodel objects
+        """
+        another = BaseModel()
+        another2 = BaseModel()
+        self.assertNotEqual(self.temp_b.id, another.id)
+        self.assertNotEqual(self.temp_b.id, another2.id)
+
+    def test_id_type_string(self):
+        """test id of the basemodel is a string
+        """
+        self.assertEqual(type(self.temp_b.id), str)
+
+    def test_updated_time(self):
+        """test that updated time gets updated
+        """
+        time1 = self.temp_b.updated_at
+        self.temp_b.save()
+        time2 = self.temp_b.updated_at
+        self.assertNotEqual(time1, time2)
+        self.assertEqual(type(time1), datetime.datetime)

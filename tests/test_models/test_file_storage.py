@@ -49,7 +49,8 @@ class TestFileStorage(unittest.TestCase):
             dump = myFile.read()
         self.assertNotEqual(len(dump), 0)
         temp_d = eval(dump)
-        key = self.temp_objs[0].__class__.__name__ + '.' + str(self.temp_objs[0].id)
+        key = self.temp_objs[0].__class__.__name__ + '.'
+        key += str(self.temp_objs[0].id)
         self.assertNotEqual(len(temp_d[key]), 0)
         key2 = 'State.412409120491902491209491024'
         try:
@@ -62,7 +63,8 @@ class TestFileStorage(unittest.TestCase):
         """
         storage.reload()
         obj_d = storage.all()
-        key = self.temp_objs[1].__class__.__name__ + '.' + str(self.temp_objs[1].id)
+        key = self.temp_objs[1].__class__.__name__ + '.'
+        key += str(self.temp_objs[1].id)
         self.assertNotEqual(obj_d[key], None)
         self.assertEqual(obj_d[key].id, self.temp_objs[1].id)
         key2 = 'State.412409120491902491209491024'
@@ -77,7 +79,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(storage.delete(BaseModel()), True)
         self.assertEqual(storage.delete(self.temp_objs[2]), True)
         obj_d = storage.all()
-        key2 = self.temp_objs[2].__class__.__name__ + '.' + str(self.temp_objs[2].id)
+        key2 = self.temp_objs[2].__class__.__name__ + '.'
+        key2 += str(self.temp_objs[2].id)
         try:
             self.assertRaises(obj_d[key2], KeyError)
         except:
