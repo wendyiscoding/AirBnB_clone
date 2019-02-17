@@ -2,15 +2,16 @@
 """console module
 """
 import cmd
-import shlex
 import models
+import shlex
 from models.base_model import BaseModel
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand
     """
     prompt = '(hbnb) '
-    class_list = ['BaseModel']
+    class_list = ['BaseModel', 'User']
 
     def do_EOF(self, args):
         """EOF command to exit the program
@@ -97,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             if attr_name is key:
                 attr_value = eval('({}){}'.format(type(value), attr_value))
         setattr(objects[string_key], attr_name, attr_value)
-        models.storage.save()
+        objects[string_key].save()
 
     @classmethod
     def verify_class(cls, args):

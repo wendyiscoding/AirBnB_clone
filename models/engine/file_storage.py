@@ -6,6 +6,7 @@ module for serializing and deserializing object to file storage
 
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage():
@@ -68,6 +69,7 @@ class FileStorage():
                 my_obj_dump = myFile.read()
         except:
             return
-        self.__objects = eval(my_obj_dump)
-        for (k, v) in self.__objects.items():
-            self.__objects[k] = BaseModel(**v)
+        objects = eval(my_obj_dump)
+        for (k, v) in objects.items():
+            objects[k] = eval(k.split('.')[0] + '(**v)')
+        self.__objects = objects
