@@ -49,8 +49,8 @@ class FileStorage():
     def delete(self, obj):
         """deletes obj from __objects
         """
-        key = obj.__class__.__name__ + '.' + str(obj.id)
         try:
+            key = obj.__class__.__name__ + '.' + str(obj.id)
             del self.__objects[key]
             return True
         except:
@@ -78,3 +78,8 @@ class FileStorage():
         for (k, v) in objects.items():
             objects[k] = eval(k.split('.')[0] + '(**v)')
         self.__objects = objects
+
+    def get_filepath(self):
+        """get filepath for JSON file
+        """
+        return self.__file_path
