@@ -17,7 +17,15 @@ class TestBaseModel(unittest.TestCase):
     def tearDown(self):
         self.temp_b = None
 
+    def test_type(self):
+        """test method for type testing of basemodel
+        """
+        self.assertIsInstance(self.temp_b, BaseModel)
+        self.assertEqual(type(self.temp_b), BaseModel)
+
     def test_basic_attribute_set(self):
+        """test method for basic attribute assignment
+        """
         self.temp_b.name = "bennett"
         self.temp_b.xyz = 400
         self.assertEqual(self.temp_b.name, "bennett")
@@ -62,6 +70,8 @@ class TestBaseModel(unittest.TestCase):
                          self.temp_b.__class__.__name__)
 
     def test_from_dict_hard(self):
+        """test for the from_dict method for basemodel objects
+        """
         self.temp_b.random = "hello!"
         self.temp_b.z = 55
         my_dict = self.temp_b.to_dict()
