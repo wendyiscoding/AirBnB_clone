@@ -24,6 +24,12 @@ class TestAmenityModel(unittest.TestCase):
         self.assertIsInstance(self.temp_b, Amenity)
         self.assertEqual(type(self.temp_b), Amenity)
         self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
+        self.assertEqual(isinstance(self.temp_b, BaseModel), True)
+
+    def test_name_type(self):
+        """tests the name type of class attribute
+        """
+        self.assertEqual(type(Amenity.name), str)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute assignment
