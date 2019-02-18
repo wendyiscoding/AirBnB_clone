@@ -2,8 +2,6 @@
 """
 module for serializing and deserializing object to file storage
 """
-
-
 import os
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -24,15 +22,10 @@ class FileStorage():
     __file_path = parent_directory + '/file.json'
     __objects = dict()
 
-    def __init__(self):
-        """instantiation method for class
-        """
-        pass
-
     def all(self):
         """returns the dictionary __objects
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id
@@ -61,7 +54,7 @@ class FileStorage():
         """
         json_dump = str({k: v.to_dict() for (k, v) in self.__objects.items()})
         json_dump = json_dump.replace('\'', '"')
-        with open(self.__file_path, 'w', encoding='utf-8') as myFile:
+        with open(FileStorage.__file_path, 'w', encoding='utf-8') as myFile:
             myFile.write(json_dump)
 
     def reload(self):
@@ -77,7 +70,7 @@ class FileStorage():
         objects = eval(my_obj_dump)
         for (k, v) in objects.items():
             objects[k] = eval(k.split('.')[0] + '(**v)')
-        self.__objects = objects
+        FileStorage.__objects = objects
 
     def get_filepath(self):
         """get filepath for JSON file
