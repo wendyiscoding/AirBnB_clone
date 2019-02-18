@@ -118,14 +118,17 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         args = line.split(".")
         cl_name = args[0]
-        action = args[1].rstrip('()')
+        action = args[1].rstrip('()').lower()
         all_objs = models.storage.all()
         full_list = []
         for (key, value) in all_objs.items():
             two_keys = key.split(".")
             if cl_name == two_keys[0]:
-                full_list.append(str(value))
-        print(full_list)
+                full_list.append(value)
+        if action == 'all':
+            print([str(val) for val in full_list])
+        elif action == 'count':
+            print(len(full_list))
 
     @classmethod
     def verify_class(cls, args):
