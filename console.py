@@ -98,12 +98,18 @@ class HBNBCommand(cmd.Cmd):
         for (key, value) in my_dict.items():
             try:
                 if attr_name in key:
-                    if type(value) is list:
-                        attr_value = eval(attr_value,
-                                          {'__builtins__': None},
-                                          {})
-                    else:
-                        attr_value = value.__class__(attr_value)
+                    obj_dir = objects[string_key].__dir__()
+                    if key in obj_dir:
+                        val_c_attr = obj_dir[obj_dir.index(key)]
+                        obj = eval('objects[string_key].__class__.' +
+                                   val_c_attr)
+                        if type(obj) is list:
+                            print('converting list')
+                            attr_value = eval(attr_value,
+                                              {'__builtins__': None},
+                                              {})
+                        else:
+                            attr_value = obj.__class__(attr_value)
             except:
                 return
         setattr(objects[string_key], attr_name, attr_value)

@@ -12,6 +12,8 @@ class Amenity(BaseModel):
     """amenity model inherits from BaseModel
     """
 
+    name = ""
+
     def __init__(self, *args, **kwargs):
         """init method for amenity class used in instantiation
         """

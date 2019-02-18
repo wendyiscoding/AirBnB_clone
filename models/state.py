@@ -12,6 +12,8 @@ class State(BaseModel):
     """state model inherits from BaseModel
     """
 
+    name = ""
+
     def __init__(self, *args, **kwargs):
         """init method for state class used in instantiation
         """
