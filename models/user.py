@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """user module
 """
 
@@ -11,6 +11,10 @@ from models.base_model import BaseModel
 class User(BaseModel):
     """user model inherits from BaseModel
     """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
 
     def __init__(self, *args, **kwargs):
         """init method for user class used in instantiation

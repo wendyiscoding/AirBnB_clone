@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 test module for testing state models
 """
@@ -24,6 +24,12 @@ class TestStateModel(unittest.TestCase):
         self.assertIsInstance(self.temp_b, State)
         self.assertEqual(type(self.temp_b), State)
         self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
+        self.assertEqual(isinstance(self.temp_b, BaseModel), True)
+
+    def test_name_type(self):
+        """tests the type of state attribute for class
+        """
+        self.assertEqual(type(State.name), str)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute assignment

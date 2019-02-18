@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 test module for testing review models
 """
@@ -24,6 +24,22 @@ class TestReviewModel(unittest.TestCase):
         self.assertIsInstance(self.temp_b, Review)
         self.assertEqual(type(self.temp_b), Review)
         self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
+        self.assertEqual(isinstance(self.temp_b, BaseModel), True)
+
+    def test_place_id_type(self):
+        """tests the place_id class attribute type of Review
+        """
+        self.assertEqual(type(Review.place_id), str)
+
+    def test_user_id_type(self):
+        """tests the user_id class attribute type of Review
+        """
+        self.assertEqual(type(Review.user_id), str)
+
+    def test_text_type(self):
+        """tests the text class attribute type of Review
+        """
+        self.assertEqual(type(Review.text), str)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute assignment

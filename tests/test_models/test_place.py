@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 test module for testing place models
 """
@@ -24,6 +24,57 @@ class TestPlaceModel(unittest.TestCase):
         self.assertIsInstance(self.temp_b, Place)
         self.assertEqual(type(self.temp_b), Place)
         self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
+        self.assertEqual(isinstance(self.temp_b, BaseModel), True)
+
+    def test_city_id_type(self):
+        """tests the city_id class attributes type for Place
+        """
+        self.assertEqual(type(Place.city_id), str)
+
+    def test_user_id_type(self):
+        """tests the user_id class attributes type for Place
+        """
+        self.assertEqual(type(Place.user_id), str)
+
+    def test_name_type(self):
+        """tests the name class attributes type for Place
+        """
+        self.assertEqual(type(Place.name), str)
+
+    def test_description_type(self):
+        """tests the description class attributes type for Place
+        """
+        self.assertEqual(type(Place.description), str)
+
+    def test_number_rooms_type(self):
+        """tests the number_rooms class attributes type for Place
+        """
+        self.assertEqual(type(Place.number_rooms), int)
+
+    def test_number_bathrooms_type(self):
+        """tests the number_bathrooms class attributes type for Place
+        """
+        self.assertEqual(type(Place.number_bathrooms), int)
+
+    def test_max_guest_type(self):
+        """tests the max_guest class attributes type for Place
+        """
+        self.assertEqual(type(Place.max_guest), int)
+
+    def test_price_by_night_type(self):
+        """tests the price_by_night class attributes type for Place
+        """
+        self.assertEqual(type(Place.price_by_night), int)
+
+    def test_latitude_type(self):
+        """tests the latitude class attributes type for Place
+        """
+        self.assertEqual(type(Place.latitude), float)
+
+    def test_longitude_type(self):
+        """tests the longitude class attributes type for Place
+        """
+        self.assertEqual(type(Place.longitude), float)
 
     def test_basic_attribute_set(self):
         """test method for basic attribute assignment

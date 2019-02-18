@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """amenity module
 """
 
@@ -11,6 +11,8 @@ from models.base_model import BaseModel
 class Amenity(BaseModel):
     """amenity model inherits from BaseModel
     """
+
+    name = ""
 
     def __init__(self, *args, **kwargs):
         """init method for amenity class used in instantiation

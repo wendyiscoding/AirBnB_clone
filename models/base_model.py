@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This module is the base model for use in all other models
 """
 
@@ -22,7 +22,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
-        models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """custom str method for str and print
