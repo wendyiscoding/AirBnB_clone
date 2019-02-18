@@ -21,7 +21,7 @@ class FileStorage():
     """
     engine_directory = os.path.dirname(os.path.abspath(__file__))
     parent_directory = os.getcwd()
-    __file_path = self.parent_directory + '/file.json'
+    __file_path = parent_directory + '/file.json'
     __objects = dict()
 
     def __init__(self):
