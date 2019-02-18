@@ -61,6 +61,7 @@ class FileStorage():
             -> path (__file_path)
         """
         json_dump = str({k: v.to_dict() for (k, v) in self.__objects.items()})
+        json_dump = json_dump.replace('\'', '"')
         with open(self.__file_path, 'w', encoding='utf-8') as myFile:
             myFile.write(json_dump)
 
