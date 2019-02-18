@@ -22,7 +22,8 @@ class TestUserModel(unittest.TestCase):
         """type checks for user model
         """
         self.assertEqual(issubclass(self.temp_b.__class__, BaseModel), True)
-        self.assertIsInstance(self.temp_b, User)
+        self.assertEqual(isinstance(self.temp_b, BaseModel), True)
+        self.assertEqual(isinstance(self.temp_b, User), True)
         self.assertEqual(type(self.temp_b), User)
 
     def test_basic_attribute_set(self):
@@ -32,6 +33,26 @@ class TestUserModel(unittest.TestCase):
         self.temp_b.xyz = 400
         self.assertEqual(self.temp_b.name, "bennett")
         self.assertEqual(self.temp_b.xyz, 400)
+
+    def test_email(self):
+        """tests the email type of user
+        """
+        self.assertEqual(type(User.email), str)
+
+    def test_password(self):
+        """tests the password type of user
+        """
+        self.assertEqual(type(User.password), str)
+
+    def test_first_name(self):
+        """tests the first_name type of user
+        """
+        self.assertEqual(type(User.first_name), str)
+
+    def test_last_name(self):
+        """tests the last_name type of user
+        """
+        self.assertEqual(type(User.last_name), str)
 
     def test_string_return(self):
         """tests the string method to make sure it returns
