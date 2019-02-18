@@ -19,16 +19,15 @@ class FileStorage():
     FileStorage class for serializing and deserializing objects
     into and from files respectively
     """
-    engine_directory = ""
-    parent_directory = ""
+    engine_directory = os.path.dirname(os.path.abspath(__file__))
+    parent_directory = os.getcwd()
+    __file_path = self.parent_directory + '/file.json'
+    __objects = dict()
 
     def __init__(self):
         """instantiation method for class
         """
-        self.engine_directory = os.path.dirname(os.path.abspath(__file__))
-        self.parent_directory = os.getcwd()
-        self.__file_path = self.parent_directory + '/file.json'
-        self.__objects = dict()
+        pass
 
     def all(self):
         """returns the dictionary __objects
