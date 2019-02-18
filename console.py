@@ -115,6 +115,18 @@ class HBNBCommand(cmd.Cmd):
         setattr(objects[string_key], attr_name, attr_value)
         objects[string_key].save()
 
+    def default(self, line):
+        args = line.split(".")
+        cl_name = args[0]
+        action = args[1].rstrip('()')
+        all_objs = models.storage.all()
+        full_list = []
+        for (key, value) in all_objs.items():
+            two_keys = key.split(".")
+            if cl_name == two_keys[0]:
+                full_list.append(str(value))
+        print(full_list)
+
     @classmethod
     def verify_class(cls, args):
         """verify class
