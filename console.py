@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """create command to create and store objects"""
+        """Create command to create and store objects"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         print(inst.id)
 
     def do_show(self, line):
-        """show command to print string representation of an instance"""
+        """Show command to print string representation of an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         print(objects[string_key])
 
     def do_destroy(self, line):
-        """destroy command to delete an instance"""
+        """Destroy command to delete an instance"""
         args = line.split()
         if not self.verify_class(args):
             return
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def do_all(self, line):
-        """prints all string rep of all instances based or not on class name"""
+        """Prints list of strings of all instances, regardless of class"""
         args = line.split()
         objects = models.storage.all()
         print_list = []
@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         print(print_list)
 
     def do_update(self, line):
-        """update instance based on cls name & id by adding or updating attr"""
+        """Update instance based on cls name & id by adding or updating attr"""
         args = shlex.split(line)
         if not self.verify_class(args):
             return
@@ -116,6 +116,8 @@ class HBNBCommand(cmd.Cmd):
         objects[string_key].save()
 
     def default(self, line):
+        """method called on input line when command prefix is not recognized
+        """
         args = line.split(".")
         cl_name = args[0]
         action = args[1].rstrip('()')
@@ -166,9 +168,13 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """when empty line is entered, do not execute anything
+        """
         pass
 
     def postloop(self):
+        """do nothing after each loop
+        """
         pass
 
 if __name__ == '__main__':
