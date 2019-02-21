@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             except Exception as e:
                 print('** no instance found **')
         elif 'update' in action:
-            
+            pass
         else:
             print(action)
             print('** default method not found **')
