@@ -138,11 +138,9 @@ class HBNBCommand(cmd.Cmd):
         elif 'show' in action:
             try:
                 c_id = args[1][6:-2]
-                print(c_id)
                 print(all_objs[cl_name + '.' + c_id])
             except Exception as e:
                 print('** no instance found **')
-                print(e)
         else:
             print(action)
             print('** default method not found **')
