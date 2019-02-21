@@ -3,6 +3,7 @@
 """
 import cmd
 import models
+import re
 import shlex
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -118,19 +119,33 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """method called on input line when command prefix is not recognized
         """
+        full_list = []
         args = line.split(".")
+        if len(args) < 2:
+            print('provide more than one argument please')
+            return
         cl_name = args[0]
         action = args[1].rstrip('()').lower()
         all_objs = models.storage.all()
-        full_list = []
         for (key, value) in all_objs.items():
             two_keys = key.split(".")
             if cl_name == two_keys[0]:
                 full_list.append(value)
-        if action == 'all':
+        if 'all' in action:
             print([str(val) for val in full_list])
-        elif action == 'count':
+        elif 'count' in action:
             print(len(full_list))
+        elif 'show' in action:
+            try:
+                c_id = args[1][6:-2]
+                print(c_id)
+                print(all_objs[cl_name + '.' + c_id])
+            except Exception as e:
+                print('** no instance found **')
+                print(e)
+        else:
+            print(action)
+            print('** default method not found **')
 
     @classmethod
     def verify_class(cls, args):
