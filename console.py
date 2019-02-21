@@ -141,6 +141,14 @@ class HBNBCommand(cmd.Cmd):
                 print(all_objs[cl_name + '.' + c_id])
             except Exception as e:
                 print('** no instance found **')
+        elif 'destroy' in action:
+            try:
+                c_id = args[1][9:-2]
+                models.storage.delete(all_objs[cl_name + '.' + c_id])
+            except Exception as e:
+                print('** no instance found **')
+        elif 'update' in action:
+            
         else:
             print(action)
             print('** default method not found **')
