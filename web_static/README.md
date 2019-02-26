@@ -16,7 +16,7 @@ Now that we have a command interpreter for managing our AirBnB objects, it's tim
 
 * All your images should be in `images` folder
 
-* You are not allowed to use `!important` and `id` (#... in the CSS file)
+* You are not allowed to use `!important` and `id` (`#...` in the CSS file)
 
 * You are not allowed to use tags `img`, `embed` and `iframe`
 
