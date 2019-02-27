@@ -2,6 +2,14 @@
 
 Now that we have a command interpreter for managing our AirBnB objects, it's time to make them alive! Before developing a big and complex web application, we will build the front end step-by-step. During this project, we will learn how to manipulate HTML and CSS languages.
 
+## Goals
+
+* Learn HTML/CSS
+
+* Create the HTML of your application
+
+* Create template of each object
+
 ## Requirements
 
 * Allowed editors: `vi`, `vim`, `emacs`
