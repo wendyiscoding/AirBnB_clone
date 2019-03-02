@@ -4,5 +4,9 @@ header{
   height: 70px;
   width: 100%;
   border-bottom: 1px solid #CCCCCC;
+
+.logo{
   background: url('images/logo.png') left 20px center no-repeat;
+  width: 100%;
+  height: 100%;
 }
